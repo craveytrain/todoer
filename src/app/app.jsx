@@ -5,31 +5,15 @@ import { reducer } from './reducers'
 import TodoList from './todo-list'
 import { setState } from './actions'
 
-const sumpin = [
-  {
-    title: 'Something',
-    id: 1,
-    done: false
-  },
-  {
-    title: 'Something else',
-    id: 2,
-    done: false
-  },
-  {
-    title: 'Even more',
-    id: 3,
-    done: false
-  }
-]
-
 export const TodosDispatch = createContext(null)
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, [])
 
   useEffect(() => {
-    setTimeout(() => dispatch(setState(sumpin)), 3000)
+    fetch('/.netlify/functions/get-state')
+      .then(response => response.json())
+      .then(data => dispatch(setState(data)))
   }, [])
 
   return (
