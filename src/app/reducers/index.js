@@ -1,4 +1,4 @@
-import {ADD_TODO, DO_TODO, UNDO_TODO, TOGGLE_TODO} from '../actions'
+import {ADD_TODO, DO_TODO, UNDO_TODO, TOGGLE_TODO, SET_STATE} from '../actions'
 
 const id = () => Math.floor(Math.random() * 10000000000)
 
@@ -22,6 +22,9 @@ export const reducer = (state, action) => {
 
     case TOGGLE_TODO:
       return state.map(t => (action.id !== t.id) ? t : {...t, done: !t.done})
+
+    case SET_STATE:
+      return action.state
 
     default:
       return state

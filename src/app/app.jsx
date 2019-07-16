@@ -1,11 +1,11 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, createContext, useEffect } from 'react'
 import { Router } from '@reach/router'
 import Layout from '../components/layout'
 import { reducer } from './reducers'
 import TodoList from './todo-list'
-import { toggleTodo } from './actions'
+import { setState } from './actions'
 
-const initialState = [
+const sumpin = [
   {
     title: 'Something',
     id: 1,
@@ -23,17 +23,25 @@ const initialState = [
   }
 ]
 
+export const TodosDispatch = createContext(null)
+
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, [])
+
+  useEffect(() => {
+    setTimeout(() => dispatch(setState(sumpin)), 3000)
+  }, [])
 
   return (
-    <Layout>
-      <Router>
-        <AppRoute path='/app'>
-          <TodoList path='/' todos={state} toggleTodo={id => dispatch(toggleTodo(id))} />
-        </AppRoute>
-      </Router>
-    </Layout>
+    <TodosDispatch.Provider value={dispatch}>
+      <Layout>
+        <Router>
+          <AppRoute path='/app'>
+            <TodoList path='/' todos={state} />
+          </AppRoute>
+        </Router>
+      </Layout>
+    </TodosDispatch.Provider>
   )
 }
 
