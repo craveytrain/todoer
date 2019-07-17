@@ -29,8 +29,6 @@ const App = () => {
   )
 }
 
-function AppRoute (props) {
-  return <div>{props.children}</div>
-}
+const AppRoute = ({children}) => <>{children}</>
 
 export default App
