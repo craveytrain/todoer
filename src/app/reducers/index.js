@@ -2,10 +2,17 @@ import {ADD_TODO, DO_TODO, UNDO_TODO, TOGGLE_TODO, SET_STATE} from '../actions'
 
 const id = () => Math.floor(Math.random() * 10000000000)
 
+export const postState = async (action, state) => fetch('/.netlify/functions/post-state', {
+  method: 'POST',
+  body: JSON.stringify({action, state})
+})
+
 export const reducer = (state, action) => {
+  let newState = state
+
   switch (action.type) {
     case ADD_TODO:
-      return [
+      newState = [
         ...state,
         {
           title: action.title,
@@ -13,20 +20,28 @@ export const reducer = (state, action) => {
           done: false
         }
       ]
+      break
 
     case DO_TODO:
-      return state.map(t => (action.id !== t.id) ? t : {...t, done: true})
+      newState = state.map(t => (action.id !== t.id) ? t : {...t, done: true})
+      break
 
     case UNDO_TODO:
-      return state.map(t => (action.id !== t.id) ? t : {...t, done: false})
+       newState = state.map(t => (action.id !== t.id) ? t : {...t, done: false})
+      break
 
     case TOGGLE_TODO:
-      return state.map(t => (action.id !== t.id) ? t : {...t, done: !t.done})
+       newState = state.map(t => (action.id !== t.id) ? t : {...t, done: !t.done})
+      break
 
     case SET_STATE:
-      return action.state
+       newState = action.state
+      break
 
     default:
-      return state
   }
+
+  postState(action, newState)
+
+  return newState
 }
