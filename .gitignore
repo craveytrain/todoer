@@ -53,6 +53,7 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.*
 
 # gatsby files
 .cache/
@@ -71,3 +72,6 @@ yarn-error.log
 # Netlify
 /lambda
 .netlify
+
+# VS Code
+.vscode
