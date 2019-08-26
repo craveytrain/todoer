@@ -5,11 +5,15 @@ import gql from 'graphql-tag'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import Todos from '../components/todos'
 
 // This query is executed at build time by Gatsby.
 const APOLLO_QUERY = gql`
 	query {
-		hello
+		allTodos {
+			title
+			completed
+		}
 	}
 `
 
@@ -22,7 +26,8 @@ export default () => (
 			{({ data, loading, error }) => {
 				if (loading) return <p>Loading...</p>
 				if (error) return <p>Error: {error.message}</p>
-				return <h1>{data.hello}</h1>
+
+				return <Todos todos={data.allTodos} />
 			}}
 		</Query>
 	</Layout>
