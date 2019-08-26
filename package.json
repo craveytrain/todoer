@@ -31,7 +31,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "postinstall": "cd functions/graphql && npm ci",
+    "postinstall": "cd functions && npm ci",
     "upgrade-interactive": "npm-check --update"
   },
   "repository": {
