@@ -11,6 +11,7 @@
 		"gatsby-plugin-offline": "^2.2.10",
 		"gatsby-plugin-react-helmet": "^3.1.5",
 		"isomorphic-fetch": "^2.2.1",
+		"netlify-lambda": "^1.6.3",
 		"react": "^16.9.0",
 		"react-apollo": "^3.0.1",
 		"react-dom": "^16.9.0",
